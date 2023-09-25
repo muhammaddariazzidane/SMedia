@@ -35,7 +35,7 @@ export default function DarkMode() {
                 type="checkbox"
                 onChange={handleDarkMode}
                 checked={theme == "dark" ? true : false}
-                className="scale-0"
+                className="hidden"
             />
 
             <BsSunFill className="swap-on fill-current w-9 text-yellow-300 h-9 p-2 rounded-full" />

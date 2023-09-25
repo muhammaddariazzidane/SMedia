@@ -8,6 +8,7 @@ import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import Alert from "@/Components/notification/Alert";
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -15,20 +16,7 @@ export default function Login({ status, canResetPassword }) {
         password: "",
         remember: false,
     });
-    const [showFlash, setShowFlash] = useState(true);
-
     const { flash } = usePage().props;
-    useEffect(() => {
-        if (flash.message) {
-            setShowFlash(true);
-            setTimeout(() => {
-                setShowFlash(false);
-            }, 3000);
-        }
-        return () => {
-            reset("password");
-        };
-    }, [flash.message]);
 
     const submit = (e) => {
         e.preventDefault();
@@ -44,12 +32,8 @@ export default function Login({ status, canResetPassword }) {
                     {status}
                 </div>
             )}
-            {showFlash && flash.message && (
-                <div className="toast toast-top toast-center top-12 lg:top-8">
-                    <div className="alert alert-warning rounded-md">
-                        <span>{flash.message}</span>
-                    </div>
-                </div>
+            {flash.message && (
+                <Alert message={flash.message} color={"alert-warning"} />
             )}
             <form
                 className="bg-white dark:bg-gray-800 px-6 py-3 shadow-md rounded-lg"
@@ -63,7 +47,7 @@ export default function Login({ status, canResetPassword }) {
                         Login using social account
                     </p>
                 </div>
-                <div className="text-center flex justify-center gap-x-2 my-5 font-semibold text-white">
+                <div className="text-center flex-wrap flex justify-center gap-x-2 my-5 font-semibold text-white">
                     <div>
                         <a
                             download={false}

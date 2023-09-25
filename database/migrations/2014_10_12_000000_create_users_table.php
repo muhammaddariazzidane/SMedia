@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50);
+            $table->string('name', 50);
             $table->string('email', 50)->unique();
             $table->string('password', 128);
             $table->string('avatar', 128)->nullable()->default('default.jpg');
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('google_id', 50)->nullable();
             $table->string('auth_type', 8)->nullable();
             $table->string('is_admin', 1)->default(false);
+            $table->string('last_seen')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
